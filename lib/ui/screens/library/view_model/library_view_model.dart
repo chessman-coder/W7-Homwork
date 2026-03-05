@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:week_7/data/repositories/songs/song_repository.dart';
-import 'package:week_7/model/settings/app_settings.dart';
 import 'package:week_7/model/songs/song.dart';
 import 'package:week_7/ui/states/player_state.dart';
 import 'package:week_7/ui/states/settings_state.dart';
@@ -25,17 +24,11 @@ class LibraryViewModel extends ChangeNotifier {
   Color get background => appSettingState.theme.backgroundColor;
 
   void init() {
-    if (_init) {
-      return;
+    if (!_init) {
+      _init = true;
     }
-    _init = true;
 
     _song = songRepository.fetchSongs();
-    notifyListeners();
-  }
-
-  void isPlaying(Song song) {
-    playerState.currentSong == song;
     notifyListeners();
   }
 
